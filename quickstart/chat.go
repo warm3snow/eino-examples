@@ -10,6 +10,8 @@ package quickstart
 
 import (
 	"context"
+	"fmt"
+	"io"
 	"log"
 
 	"github.com/cloudwego/eino-ext/components/model/ollama"
@@ -25,7 +27,7 @@ var (
 	)
 )
 
-func Chat(role, style, question string, chat_history []string) {
+func Chat(role, style, question string, chat_history []string, isStream bool) {
 	// 1. create message, use GoTemplate
 	messages := CreateMessages(role, style, question, chat_history)
 
@@ -33,12 +35,22 @@ func Chat(role, style, question string, chat_history []string) {
 	chatModel := CreateOllamaChatModel(context.Background())
 
 	// 3. run chatModel
-	response, err := chatModel.Generate(context.Background(), messages)
-	if err != nil {
-		panic(err)
+	if !isStream {
+		response, err := chatModel.Generate(context.Background(), messages)
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("Chat response: %v", response)
+
+	} else {
+		// stream response
+		response, err := chatModel.Stream(context.Background(), messages)
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("Chat stream response: ")
+		ReportStream(response)
 	}
-	// 4. print response
-	log.Printf("Chat response: %v", response)
 }
 
 func CreateMessages(role, style, question string, chat_history []string) []*schema.Message {
@@ -69,4 +81,21 @@ func CreateOllamaChatModel(ctx context.Context) *ollama.ChatModel {
 		panic(err)
 	}
 	return chatModel
+}
+
+func ReportStream(resp *schema.StreamReader[*schema.Message]) {
+	defer resp.Close()
+
+	for {
+		msg, err := resp.Recv()
+		if err == io.EOF {
+			return
+		}
+		if err != nil {
+			log.Fatalf("Error reading stream: %v", err)
+			return
+		}
+		fmt.Printf("%s", msg.Content)
+	}
+	fmt.Println()
 }
