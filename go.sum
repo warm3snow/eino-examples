@@ -17,6 +17,8 @@ github.com/cloudwego/eino v0.3.40 h1:MiUjwLHZng4PsrzQX1dDns42vSS+/G+vlTqXWaORuGw
 github.com/cloudwego/eino v0.3.40/go.mod h1:wUjz990apdsaOraOXdh6CdhVXq8DJsOvLsVlxNTcNfY=
 github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250530094010-bd1c4fc20bbe h1:1COgFMnBLSS4K/Z+1rLI0qPccyOPXfnBzdGKEgTNOms=
 github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250530094010-bd1c4fc20bbe/go.mod h1:giNUFqA+V7xrm/EDvH7JFnDqoWI+e2m1SVAnReU+Fd8=
+github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250604063857-19ef29584858 h1:AAqv8Nt2uFt3ZyzAKhApyus1LJWWCqKPVTS6d10DQ84=
+github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250604063857-19ef29584858/go.mod h1:1IhBXuMg7LRynEREZiMWenqrIufX3dz8ysE8ezNiavU=
 github.com/cloudwego/iasm v0.2.0/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -137,6 +139,8 @@ github.com/x-cray/logrus-prefixed-formatter v0.5.2 h1:00txxvfBM9muc0jiLIEAkAcIMJ
 github.com/x-cray/logrus-prefixed-formatter v0.5.2/go.mod h1:2duySbKsL6M18s5GU7VPsoEPHyzalCE06qoARUCeBBE=
 github.com/yargevad/filepathx v1.0.0 h1:SYcT+N3tYGi+NvazubCNlvgIPbzAk7i7y2dwg3I5FYc=
 github.com/yargevad/filepathx v1.0.0/go.mod h1:BprfX/gpYNJHJfc35GjRRpVcwWXS89gGulUIU5tK3tA=
+go.uber.org/mock v0.4.0 h1:VcM4ZOtdbR4f6VXfiOpwpVJDL6lCReaZ6mw31wqh7KU=
+go.uber.org/mock v0.4.0/go.mod h1:a6FSlNadKUHUa9IP5Vyt1zh4fC7uAwxMutEAscFbkZc=
 golang.org/x/arch v0.11.0 h1:KXV8WWKCXm6tRpLirl2szsO5j/oOODwZf4hATmGVNs4=
 golang.org/x/arch v0.11.0/go.mod h1:FEVrYAQjsQXMVJ1nsMoVVXPZg6p2JE2mx8psSWTDQys=
 golang.org/x/crypto v0.0.0-20180904163835-0709b304e793/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=

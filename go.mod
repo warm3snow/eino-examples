@@ -5,6 +5,7 @@ go 1.24.1
 require (
 	github.com/cloudwego/eino v0.3.40
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250530094010-bd1c4fc20bbe
+	github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250604063857-19ef29584858
 )
 
 require (
