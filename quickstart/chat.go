@@ -89,11 +89,11 @@ func ReportStream(resp *schema.StreamReader[*schema.Message]) {
 	for {
 		msg, err := resp.Recv()
 		if err == io.EOF {
-			return
+			break
 		}
 		if err != nil {
 			log.Fatalf("Error reading stream: %v", err)
-			return
+			break
 		}
 		fmt.Printf("%s", msg.Content)
 	}
