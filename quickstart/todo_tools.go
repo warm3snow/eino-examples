@@ -16,7 +16,7 @@ func getTodoTools() []tool.BaseTool {
 		getAddTodoTool(),
 		getUpdateTodoTool(),
 		&ListTodoTool{},
-		getSearchTool(),
+		// getSearchTool(),
 	}
 }
 
