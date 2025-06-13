@@ -2,6 +2,7 @@ package quickstart
 
 import (
 	"context"
+	"log"
 
 	"github.com/cloudwego/eino/components/tool"
 	"github.com/cloudwego/eino/components/tool/utils"
@@ -29,6 +30,7 @@ func ReactAgent(ctx context.Context, systemMessage string, userMessages []string
 			res = append(res, input...)
 			return res
 		},
+		MaxStep: 12, // max tool call is 5. 12/2 - 1 = 5
 	})
 	if err != nil {
 		return "", err
@@ -39,12 +41,29 @@ func ReactAgent(ctx context.Context, systemMessage string, userMessages []string
 	for _, userMessage := range userMessages {
 		messages = append(messages, schema.UserMessage(userMessage))
 	}
-	response, err := agent.Generate(context.Background(), messages)
-	if err != nil {
-		return "", err
-	}
+	// response, err := agent.Generate(context.Background(), messages)
+	// if err != nil {
+	// 	return "", err
+	// }
 
-	return response.String(), nil
+	modelCallbackHandler := componentCallbacks()
+
+	chain := compose.NewChain[[]*schema.Message, string]()
+	agentLambda, _ := compose.AnyLambda(agent.Generate, agent.Stream, nil, nil)
+
+	chain.
+		AppendLambda(agentLambda).
+		AppendLambda(compose.InvokableLambda(func(ctx context.Context, input *schema.Message) (string, error) {
+			log.Printf("got agent response: %s\n", input.Content)
+			return input.Content, nil
+		}))
+
+	r, _ := chain.Compile(ctx)
+	res, _ := r.Invoke(ctx, messages,
+		compose.WithCallbacks(modelCallbackHandler),
+	)
+
+	return res, nil
 }
 
 func getUserInfoTool() []tool.BaseTool {
